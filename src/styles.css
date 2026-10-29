@@ -1,0 +1,207 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-mono: var(--font-mono-nums);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+/*
+  Design system — "Grand Livre" (ledger)
+  A resale/margin-tracking tool reads naturally as a ledger: warm parchment
+  surfaces, a deep pine-green "in the black" primary, a price-tag mustard
+  accent, and a dedicated monospace face for every number so figures line
+  up like columns in an account book. Tighter corner radius than a typical
+  soft SaaS dashboard — closer to a ticket or receipt than a bubble.
+*/
+:root {
+  color-scheme: light;
+  --radius: 0.6rem;
+
+  --background: #fbf7ef;
+  --foreground: #1b1a16;
+
+  --card: #fffefa;
+  --card-foreground: #1b1a16;
+
+  --popover: #fffefa;
+  --popover-foreground: #1b1a16;
+
+  --primary: #1f5d46;
+  --primary-foreground: #ffffff;
+
+  --secondary: #eaf0ea;
+  --secondary-foreground: #2c4a3d;
+
+  --muted: #f3efe3;
+  --muted-foreground: #7a7362;
+
+  --accent: #c98a1d;
+  --accent-foreground: #1b1a16;
+
+  --success: #2f9e6e;
+  --success-foreground: #ffffff;
+
+  --destructive: #b3402b;
+  --destructive-foreground: #ffffff;
+
+  --border: #e4dcc8;
+  --input: #e4dcc8;
+  --ring: #1f5d46;
+
+  --sidebar: #fffefa;
+  --sidebar-foreground: #2c4a3d;
+  --sidebar-border: #ede4cf;
+  --sidebar-accent: #eaf0ea;
+
+  --chart-1: #1f5d46;
+  --chart-2: #c98a1d;
+  --chart-3: #2f9e6e;
+  --chart-4: #6b7280;
+  --chart-5: #94897a;
+
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --font-body: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono-nums: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-body);
+    font-feature-settings:
+      "rlig" 1,
+      "calt" 1;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+  }
+}
+
+/* Utility helpers */
+.glass {
+  background: linear-gradient(180deg, rgba(255, 254, 250, 0.88), rgba(255, 254, 250, 0.74));
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--border);
+}
+
+.brand-glow {
+  box-shadow:
+    0 0 0 1px rgba(31, 93, 70, 0.14),
+    0 10px 30px -10px rgba(31, 93, 70, 0.35);
+}
+
+.grid-fade {
+  background-image: radial-gradient(circle at 1px 1px, rgba(31, 93, 70, 0.08) 1px, transparent 0);
+  background-size: 28px 28px;
+}
+
+@utility panel {
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 10px 30px -24px rgba(27, 26, 22, 0.35);
+}
+
+@utility text-gradient {
+  background: linear-gradient(100deg, var(--foreground) 8%, var(--primary) 55%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Applied to KPI figures, table prices, and other numeric columns — the
+   ledger's signature: every amount in a fixed-width face, digits aligned. */
+@utility nums {
+  font-family: var(--font-mono-nums);
+  font-variant-numeric: tabular-nums;
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 0.2;
+  }
+  100% {
+    transform: scale(1.9);
+    opacity: 0;
+  }
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #ded2ab;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #cbbb85;
+}
